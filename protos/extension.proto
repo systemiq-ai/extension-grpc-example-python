@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package protos;
+
+option go_package = "systemiq.ai/protos";
+
+// Define the gRPC service
+service DataExtension {
+    // Relay data with configuration and token, and get a status response
+    rpc ExtensionData (ExtensionRequest) returns (ExtensionResponse);
+}
+
+// Request message format
+message ExtensionRequest {
+    repeated string data = 1;        // JSON-encoded data strings
+    repeated string indicators = 2;  // List of indicators
+    string action = 3;               // Action (e.g., "process", "skip")
+    string config_json = 4;          // Configuration in JSON format
+    string token = 5;                // JWT token for authentication
+}
+
+// Response message format
+message ExtensionResponse {
+}
